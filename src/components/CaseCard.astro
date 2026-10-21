@@ -30,6 +30,17 @@ const { item, index } = Astro.props;
     <ul class="tags">
       {item.tags.map((tag) => <li>{tag}</li>)}
     </ul>
+    {
+      item.links && (
+        <p class="case__links">
+          {item.links.map((link) => (
+            <a class="link" href={link.href} target="_blank" rel="noopener">
+              {link.label} ↗
+            </a>
+          ))}
+        </p>
+      )
+    }
   </footer>
 </article>
 
@@ -100,6 +111,14 @@ const { item, index } = Astro.props;
     border-radius: 12px;
     background: var(--accent-soft);
     font-size: 16px;
+  }
+
+  .case__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 14px;
+    font-size: 15px;
   }
 
   .case__result-label {

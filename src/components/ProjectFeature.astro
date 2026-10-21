@@ -17,16 +17,11 @@ const media = project.media;
     media && (
       <div class="feature__media">
         {media.type === 'video' ? (
-          <video
-            src={`${base}${media.src}`}
-            poster={`${base}${media.poster}`}
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="none"
-            aria-label={`Демо ${project.title}`}
-          />
+          <video poster={`${base}${media.poster}`} autoplay muted loop playsinline aria-label={media.alt}>
+            {media.sources.map((source) => (
+              <source src={`${base}${source.src}`} type={source.type} />
+            ))}
+          </video>
         ) : (
           <img src={`${base}${media.src}`} alt={media.alt} loading="lazy" decoding="async" width="1200" height="750" />
         )}
@@ -98,7 +93,7 @@ const media = project.media;
   }
 
   .feature__media video {
-    object-fit: contain;
+    aspect-ratio: auto;
   }
 
   .feature__body {
