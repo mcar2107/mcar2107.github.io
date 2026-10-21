@@ -1,0 +1,512 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import CaseCard from '../components/CaseCard.astro';
+import ProjectFeature from '../components/ProjectFeature.astro';
+import { cases, earlier, job, profile, projects, skills, smallProjects, stats } from '../data/content';
+import { t } from '../lib/typograf';
+
+const { telegram, email, github } = profile.contacts;
+---
+
+<Base
+  title="Макар Короленко — Frontend-разработчик"
+  description="Портфолио фронтенд-разработчика: 4 года в amoCRM — мессенджер amo, AI-ассистент, дизайн-система и агентский конвейер лендингов. TypeScript, React, Next.js, Astro."
+>
+  <Header />
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container">
+        <p class="eyebrow">{profile.role} · {profile.location}</p>
+        <h1>{profile.name}</h1>
+        <p class="hero__lead" set:html={t(profile.lead)} />
+        <div class="hero__actions">
+          <a class="btn btn--primary" href={telegram.href} target="_blank" rel="noopener">Написать в Telegram</a>
+          <a class="btn" href={email.href}>Email</a>
+          <a class="btn" href={github.href} target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <dl class="stats">
+          {
+            stats.map((stat) => (
+              <div class="stat">
+                <dt set:html={t(stat.label)} />
+                <dd>{stat.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">Опыт</p>
+          <h2 id="experience-title">{job.company} <span class="muted">· {job.period}</span></h2>
+          <p class="section__lead" set:html={t(job.about)} />
+          <p class="section__links">
+            Продукты:{' '}
+            {
+              job.links.map((link, i) => (
+                <>
+                  {i > 0 && ', '}
+                  <a class="link" href={link.href} target="_blank" rel="noopener">
+                    {link.label}
+                  </a>
+                </>
+              ))
+            }
+          </p>
+        </div>
+        <div class="cases">
+          {cases.map((item, index) => <CaseCard item={item} index={index} />)}
+        </div>
+
+        <h3 class="subhead">До amoCRM</h3>
+        <div class="earlier">
+          {
+            earlier.map((item) => (
+              <article class="earlier__item">
+                <p class="earlier__period">{item.period}</p>
+                <div>
+                  <h4 set:html={t(`${item.company} — ${item.role}`)} />
+                  <p set:html={t(item.text)} />
+                  <ul class="tags">
+                    {item.tags.map((tag) => (
+                      <li>{tag}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">Проекты</p>
+          <h2 id="projects-title">Свои проекты</h2>
+          <p class="section__lead" set:html={t('Делаю инструменты, которые решают мои собственные задачи, и довожу их до пользователей. Код открыт.')} />
+        </div>
+        <div class="features">
+          {projects.map((project, i) => <ProjectFeature project={project} reverse={i % 2 === 1} />)}
+        </div>
+
+        <h3 class="subhead">Ещё</h3>
+        <ul class="small">
+          {
+            smallProjects.map((project) => (
+              <li class="small__item">
+                <h4>{project.title}</h4>
+                <p set:html={t(project.summary)} />
+                <ul class="tags">
+                  {project.stack.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+                <p class="small__links">
+                  {project.links.map((link) => (
+                    <a class="link" href={link.href} target="_blank" rel="noopener">
+                      {link.label} ↗
+                    </a>
+                  ))}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="more">
+          Остальное, включая учебные проекты 2021–2022 годов, —{' '}
+          <a class="link" href={`${github.href}?tab=repositories`} target="_blank" rel="noopener">на GitHub</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">Стек</p>
+          <h2 id="skills-title">С чем работаю</h2>
+        </div>
+        <dl class="skills">
+          {
+            skills.map((group) => (
+              <div class="skills__row">
+                <dt>{group.group}</dt>
+                <dd>
+                  <ul class="tags">
+                    {group.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    <section class="section contacts" id="contacts" aria-labelledby="contacts-title">
+      <div class="container">
+        <div class="contacts__card">
+          <p class="eyebrow">Контакты</p>
+          <h2 id="contacts-title" set:html={t('Открыт к предложениям — напишите')} />
+          <ul class="contacts__list">
+            <li>
+              <span>Telegram</span>
+              <a class="link" href={telegram.href} target="_blank" rel="noopener">{telegram.label}</a>
+            </li>
+            <li>
+              <span>Email</span>
+              <a class="link" href={email.href}>{email.label}</a>
+            </li>
+            <li>
+              <span>GitHub</span>
+              <a class="link" href={github.href} target="_blank" rel="noopener">{github.label}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© {new Date().getFullYear()} {profile.name}</span>
+      <a class="link" href="https://github.com/mcar2107/mcar2107.github.io" target="_blank" rel="noopener">
+        Исходники сайта · Astro
+      </a>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  .muted {
+    color: var(--text-faint);
+    font-weight: 500;
+  }
+
+  .hero {
+    position: relative;
+    padding-block: clamp(56px, 10vw, 120px) clamp(40px, 6vw, 72px);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: -40% -10% auto auto;
+    width: min(720px, 90vw);
+    aspect-ratio: 1;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: auto auto -30% -15%;
+    width: min(520px, 80vw);
+    aspect-ratio: 1;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--pink) 10%, transparent), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    margin-top: 14px;
+    font-size: clamp(44px, 8vw, 92px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-weight: 700;
+  }
+
+  .hero__lead {
+    max-width: 720px;
+    margin-top: 24px;
+    color: var(--text-muted);
+    font-size: clamp(18px, 2vw, 21px);
+    line-height: 1.55;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 32px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    margin: clamp(48px, 7vw, 80px) 0 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--border);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 20px 22px;
+    background: var(--bg-elevated);
+  }
+
+  .stat dd {
+    margin: 0;
+    font-size: clamp(24px, 2.6vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .stat dt {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    line-height: 1.4;
+  }
+
+  .section {
+    padding-block: clamp(56px, 8vw, 104px);
+    border-top: 1px solid var(--border);
+  }
+
+  .section__head {
+    max-width: 780px;
+    margin-bottom: clamp(32px, 4vw, 48px);
+  }
+
+  h2 {
+    margin-top: 10px;
+    font-size: clamp(32px, 4.4vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  .section__lead {
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-size: 18px;
+  }
+
+  .section__links {
+    margin-top: 12px;
+    color: var(--text-muted);
+  }
+
+  .cases {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .subhead {
+    margin: clamp(48px, 6vw, 72px) 0 20px;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .earlier {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .earlier__item {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 24px;
+    padding-block: 22px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .earlier__item h4 {
+    font-size: 18px;
+    margin: 0 0 6px;
+  }
+
+  .earlier__item p {
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .earlier__item .earlier__period {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text-faint);
+    padding-top: 3px;
+  }
+
+  .features {
+    display: grid;
+    gap: clamp(56px, 8vw, 96px);
+  }
+
+  .small {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .small__item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-elevated);
+  }
+
+  .small__item h4 {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 16px;
+  }
+
+  .small__item > p {
+    color: var(--text-muted);
+    font-size: 15.5px;
+  }
+
+  .small__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: auto;
+    font-size: 15px;
+  }
+
+  .more {
+    margin-top: 24px;
+    color: var(--text-muted);
+  }
+
+  .skills {
+    margin: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .skills__row {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 24px;
+    align-items: baseline;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skills__row dt {
+    font-weight: 600;
+  }
+
+  .skills__row dd {
+    margin: 0;
+  }
+
+  .skills .tags li {
+    color: var(--text);
+    font-size: 13.5px;
+  }
+
+  .contacts {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .contacts__card {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(28px, 5vw, 56px);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 6px);
+    background:
+      radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 55%),
+      var(--bg-elevated);
+  }
+
+  .contacts__list {
+    display: grid;
+    gap: 12px;
+    margin-top: 28px;
+    padding: 0;
+    list-style: none;
+    font-size: clamp(17px, 2vw, 20px);
+  }
+
+  .contacts__list li {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .contacts__list span {
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 14px;
+    padding-top: 4px;
+  }
+
+  .contacts__list a {
+    overflow-wrap: anywhere;
+  }
+
+  .footer {
+    padding-block: 28px 40px;
+    color: var(--text-faint);
+    font-size: 14px;
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  @media (max-width: 960px) {
+    .stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cases,
+    .small {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .earlier__item,
+    .skills__row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+    }
+
+    .contacts__list li {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+
+    .stat {
+      padding: 16px;
+    }
+
+    .stat dd {
+      font-size: 20px;
+    }
+  }
+</style>

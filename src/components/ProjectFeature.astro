@@ -1,0 +1,177 @@
+---
+import type { Project } from '../data/content';
+import { t } from '../lib/typograf';
+
+interface Props {
+  project: Project;
+  reverse?: boolean;
+}
+
+const { project, reverse = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const media = project.media;
+---
+
+<article class:list={['feature', { 'feature--reverse': reverse, 'feature--text': !media }]} id={project.id}>
+  {
+    media && (
+      <div class="feature__media">
+        {media.type === 'video' ? (
+          <video
+            src={`${base}${media.src}`}
+            poster={`${base}${media.poster}`}
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="none"
+            aria-label={`Демо ${project.title}`}
+          />
+        ) : (
+          <img src={`${base}${media.src}`} alt={media.alt} loading="lazy" decoding="async" width="1200" height="750" />
+        )}
+      </div>
+    )
+  }
+  <div class="feature__body">
+    <div class="feature__head">
+      <h3>{project.title}</h3>
+      {project.badge && <span class="feature__badge">{project.badge}</span>}
+    </div>
+    <p class="feature__summary" set:html={t(project.summary)} />
+    <ul class="feature__points">
+      {project.points.map((point) => <li set:html={t(point)} />)}
+    </ul>
+    <ul class="tags">
+      {project.stack.map((item) => <li>{item}</li>)}
+    </ul>
+    <div class="feature__links">
+      {
+        project.links.map((link, i) => (
+          <a class:list={['btn', { 'btn--primary': i === 0 }]} href={link.href} target="_blank" rel="noopener">
+            {link.label}
+            <span aria-hidden="true">↗</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(24px, 4vw, 56px);
+  }
+
+  .feature--reverse .feature__media {
+    order: 2;
+  }
+
+  .feature--text {
+    grid-template-columns: minmax(0, 1fr);
+    padding: clamp(20px, 3vw, 32px);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+  }
+
+  .feature--text .feature__body {
+    max-width: 760px;
+  }
+
+  .feature__media {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-sunken);
+    box-shadow: var(--shadow);
+  }
+
+  .feature__media img,
+  .feature__media video {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .feature__media video {
+    object-fit: contain;
+  }
+
+  .feature__body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .feature__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+  }
+
+  h3 {
+    font-size: clamp(26px, 3vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .feature__badge {
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--pink) 14%, transparent);
+    color: var(--pink);
+    font-family: var(--mono);
+    font-size: 12.5px;
+  }
+
+  .feature__summary {
+    color: var(--text-muted);
+    font-size: 18px;
+  }
+
+  .feature__points {
+    display: grid;
+    gap: 8px;
+    padding: 0;
+    list-style: none;
+    font-size: 16px;
+  }
+
+  .feature__points li {
+    position: relative;
+    padding-left: 22px;
+  }
+
+  .feature__points li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0.68em;
+    width: 8px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+
+  .feature__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 860px) {
+    .feature {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .feature--reverse .feature__media {
+      order: 0;
+    }
+  }
+</style>
