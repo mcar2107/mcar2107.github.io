@@ -22,7 +22,7 @@ const ruUi = {
   ogLocale: 'ru_RU',
   title: 'Макар Короленко — Frontend-разработчик',
   description:
-    'Портфолио фронтенд-разработчика: 4 года в amoCRM — amo мессенджер на React и Electron, сервис промо-лендингов на Astro, AI-ассистент amoCRM. TypeScript, React, Next.js, Astro.',
+    'Фронтенд-разработчик, четыре года в amoCRM: amo мессенджер на React и Electron, сервис промо-лендингов на Astro, AI-ассистент. Веду задачи от ТЗ до прода.',
   skip: 'Перейти к содержимому',
   toTop: 'Наверх',
   sections: 'Разделы',
@@ -53,7 +53,7 @@ export const ui: Record<Lang, typeof ruUi> = {
     ogLocale: 'en_US',
     title: 'Makar Korolenko — Frontend Developer',
     description:
-      'Frontend developer portfolio: 4 years at amoCRM — the amo messenger on React and Electron, a promo landing page service on Astro, the amoCRM AI assistant. TypeScript, React, Next.js, Astro.',
+      'Frontend developer, four years at amoCRM: the amo messenger on React and Electron, a promo landing page service on Astro, an AI assistant. I take tasks from spec to production.',
     skip: 'Skip to content',
     toTop: 'Back to top',
     sections: 'Sections',
