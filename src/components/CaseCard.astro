@@ -1,13 +1,15 @@
 ---
 import type { Case } from '../data/content';
 import { t } from '../lib/typograf';
+import { ui, type Lang } from '../i18n';
 
 interface Props {
   item: Case;
   index: number;
+  lang: Lang;
 }
 
-const { item, index } = Astro.props;
+const { item, index, lang } = Astro.props;
 ---
 
 <article
@@ -19,15 +21,15 @@ const { item, index } = Astro.props;
       <span class="text-pink">{String(index + 1).padStart(2, '0')}</span>
       <span>{item.product}</span>
     </p>
-    <h3 class="text-[clamp(21px,2.2vw,24px)] leading-[1.25] tracking-[-0.01em]" set:html={t(item.title)} />
+    <h3 class="text-[clamp(21px,2.2vw,24px)] leading-[1.25] tracking-[-0.01em]" set:html={t(item.title, lang)} />
   </header>
-  <p class="text-muted" set:html={t(item.context)} />
+  <p class="text-muted" set:html={t(item.context, lang)} />
   <ul class="bullets text-[16px]">
-    {item.done.map((line) => <li set:html={t(line)} />)}
+    {item.done.map((line) => <li set:html={t(line, lang)} />)}
   </ul>
   <p class="mt-auto grid gap-0.5 rounded-xl bg-accent-soft px-4 py-3.5 text-[16px]">
-    <span class="eyebrow text-[12px]">Результат</span>
-    <span set:html={t(item.result)} />
+    <span class="eyebrow text-[12px]">{ui[lang].result}</span>
+    <span set:html={t(item.result, lang)} />
   </p>
   <footer>
     <ul class="tags">

@@ -1,13 +1,15 @@
 ---
 import type { Project } from '../data/content';
 import { t } from '../lib/typograf';
+import type { Lang } from '../i18n';
 
 interface Props {
   project: Project;
   reverse?: boolean;
+  lang: Lang;
 }
 
-const { project, reverse = false } = Astro.props;
+const { project, reverse = false, lang } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const media = project.media;
 ---
@@ -58,9 +60,9 @@ const media = project.media;
         )
       }
     </div>
-    <p class="text-[18px] text-muted" set:html={t(project.summary)} />
+    <p class="text-[18px] text-muted" set:html={t(project.summary, lang)} />
     <ul class="bullets text-[16px]">
-      {project.points.map((point) => <li set:html={t(point)} />)}
+      {project.points.map((point) => <li set:html={t(point, lang)} />)}
     </ul>
     <ul class="tags">
       {project.stack.map((item) => <li>{item}</li>)}

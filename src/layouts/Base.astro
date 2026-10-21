@@ -2,36 +2,55 @@
 import '@fontsource-variable/onest';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
+import { fallbackLang, langUrl, langs, ui, type Lang } from '../i18n';
 
 interface Props {
+  lang: Lang;
   title: string;
   description: string;
 }
 
-const { title, description } = Astro.props;
+const { lang, title, description } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(`${base}og.png`, Astro.site);
+// Для скрипта в head: язык — выбранный вручную, иначе первый поддерживаемый из настроек браузера,
+// иначе fallbackLang. Ботов не уводим, чтобы обе версии индексировались.
+const urls = Object.fromEntries(langs.map((l) => [l, langUrl(l)]));
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {langs.map((l) => <link rel="alternate" hreflang={l} href={new URL(langUrl(l), Astro.site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(langUrl(fallbackLang), Astro.site)} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale" content={ui[lang].ogLocale} />
+    {langs.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={ui[l].ogLocale} />)}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#0c0b14" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f7f6fb" media="(prefers-color-scheme: light)" />
+    <script is:inline define:vars={{ lang, urls, fallbackLang }}>
+      if (!/bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent)) {
+        let saved = null;
+        try {
+          saved = localStorage.getItem('lang');
+        } catch {}
+        const browser = (navigator.languages || [navigator.language]).map((l) => l.toLowerCase().split('-')[0]);
+        const wanted = [saved, ...browser].find((l) => Object.hasOwn(urls, l)) ?? fallbackLang;
+        if (wanted !== lang) location.replace(urls[wanted] + location.hash);
+      }
+    </script>
     <script is:inline>
       try {
         const saved = localStorage.getItem('theme');
@@ -42,7 +61,10 @@ const ogImage = new URL(`${base}og.png`, Astro.site);
   <body>
     <a
       class="absolute -top-25 left-4 z-100 rounded-[10px] bg-accent px-3.5 py-2 font-semibold text-bg focus:top-3"
-      href="#main">Перейти к содержимому</a>
+      href="#main"
+    >
+      {ui[lang].skip}
+    </a>
     <slot />
   </body>
 </html>
