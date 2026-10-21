@@ -40,7 +40,9 @@ const ogImage = new URL(`${base}og.png`, Astro.site);
     </script>
   </head>
   <body>
-    <a class="skip" href="#main">Перейти к содержимому</a>
+    <a
+      class="absolute -top-25 left-4 z-100 rounded-[10px] bg-accent px-3.5 py-2 font-semibold text-bg focus:top-3"
+      href="#main">Перейти к содержимому</a>
     <slot />
   </body>
 </html>

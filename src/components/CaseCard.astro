@@ -10,20 +10,23 @@ interface Props {
 const { item, index } = Astro.props;
 ---
 
-<article class="case" id={item.id}>
+<article
+  class="flex flex-col gap-4 rounded-card border border-line bg-elevated p-[clamp(20px,3vw,28px)] shadow-card last:odd:col-span-full"
+  id={item.id}
+>
   <header>
-    <p class="case__meta">
-      <span class="case__num">{String(index + 1).padStart(2, '0')}</span>
+    <p class="mb-1.5 flex gap-2.5 font-mono text-[13px] text-faint">
+      <span class="text-pink">{String(index + 1).padStart(2, '0')}</span>
       <span>{item.product}</span>
     </p>
-    <h3 set:html={t(item.title)} />
+    <h3 class="text-[clamp(21px,2.2vw,24px)] leading-[1.25] tracking-[-0.01em]" set:html={t(item.title)} />
   </header>
-  <p class="case__context" set:html={t(item.context)} />
-  <ul class="case__done">
+  <p class="text-muted" set:html={t(item.context)} />
+  <ul class="bullets text-[16px]">
     {item.done.map((line) => <li set:html={t(line)} />)}
   </ul>
-  <p class="case__result">
-    <span class="case__result-label">Результат</span>
+  <p class="mt-auto grid gap-0.5 rounded-xl bg-accent-soft px-4 py-3.5 text-[16px]">
+    <span class="eyebrow text-[12px]">Результат</span>
     <span set:html={t(item.result)} />
   </p>
   <footer>
@@ -32,7 +35,7 @@ const { item, index } = Astro.props;
     </ul>
     {
       item.links && (
-        <p class="case__links">
+        <p class="mt-3.5 flex flex-wrap gap-3.5 text-[15px]">
           {item.links.map((link) => (
             <a class="link" href={link.href} target="_blank" rel="noopener">
               {link.label} ↗
@@ -43,89 +46,3 @@ const { item, index } = Astro.props;
     }
   </footer>
 </article>
-
-<style>
-  .case {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: clamp(20px, 3vw, 28px);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--bg-elevated);
-    box-shadow: var(--shadow);
-  }
-
-  .case__meta {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 6px;
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--text-faint);
-  }
-
-  .case__num {
-    color: var(--pink);
-  }
-
-  h3 {
-    font-size: clamp(21px, 2.2vw, 24px);
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-  }
-
-  .case__context {
-    color: var(--text-muted);
-  }
-
-  .case__done {
-    display: grid;
-    gap: 8px;
-    padding: 0;
-    list-style: none;
-    font-size: 16px;
-  }
-
-  .case__done li {
-    position: relative;
-    padding-left: 22px;
-  }
-
-  .case__done li::before {
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: 0.68em;
-    width: 8px;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--accent);
-  }
-
-  .case__result {
-    display: grid;
-    gap: 2px;
-    margin-top: auto;
-    padding: 14px 16px;
-    border-radius: 12px;
-    background: var(--accent-soft);
-    font-size: 16px;
-  }
-
-  .case__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-top: 14px;
-    font-size: 15px;
-  }
-
-  .case__result-label {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-</style>
