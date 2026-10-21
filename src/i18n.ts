@@ -20,7 +20,6 @@ export const langUrl = (lang: Lang) => {
 const ruUi = {
   langName: 'Русский',
   ogLocale: 'ru_RU',
-  ogImage: 'og.png',
   title: 'Макар Короленко — Frontend-разработчик',
   description:
     'Портфолио фронтенд-разработчика: 4 года в amoCRM — amo мессенджер на React и Electron, сервис промо-лендингов на Astro, AI-ассистент amoCRM. TypeScript, React, Next.js, Astro.',
@@ -52,7 +51,6 @@ export const ui: Record<Lang, typeof ruUi> = {
   en: {
     langName: 'English',
     ogLocale: 'en_US',
-    ogImage: 'og-en.png',
     title: 'Makar Korolenko — Frontend Developer',
     description:
       'Frontend developer portfolio: 4 years at amoCRM — the amo messenger on React and Electron, a promo landing page service on Astro, the amoCRM AI assistant. TypeScript, React, Next.js, Astro.',
