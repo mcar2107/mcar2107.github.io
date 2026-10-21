@@ -22,7 +22,7 @@ const ruUi = {
   ogLocale: 'ru_RU',
   title: 'Макар Короленко — Frontend-разработчик',
   description:
-    'Портфолио фронтенд-разработчика: 4 года в amoCRM — мессенджер amo на React и Electron, сервис промо-лендингов на Astro, AI-ассистент amoCRM. TypeScript, React, Next.js, Astro.',
+    'Портфолио фронтенд-разработчика: 4 года в amoCRM — amo мессенджер на React и Electron, сервис промо-лендингов на Astro, AI-ассистент amoCRM. TypeScript, React, Next.js, Astro.',
   skip: 'Перейти к содержимому',
   toTop: 'Наверх',
   sections: 'Разделы',

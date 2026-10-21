@@ -3,7 +3,7 @@ import type { Case, Bug, Project, Link } from './content';
 export const profile = {
   name: 'Makar Korolenko',
   role: 'Frontend Developer',
-  location: 'Moscow · office, hybrid, remote',
+  location: 'Moscow · hybrid, remote',
   lead: 'Four years on the amoCRM frontend: the amo messenger (web and Electron), a promo landing page service on Astro, an AI assistant. I take tasks from spec to production on my own.',
   contacts: {
     telegram: { label: '@mcar_2107', href: 'https://t.me/mcar_2107' },
@@ -177,7 +177,7 @@ export const projects: Project[] = [
     stack: ['TypeScript', 'Preact', 'Tailwind', 'esbuild', 'Vitest'],
     links: [
       { label: 'Chrome Web Store', href: 'https://chromewebstore.google.com/detail/amo-stickers/abjnjphijggkkdbbmkldhibgepgdcgip' },
-      { label: 'Docs', href: 'https://mcar2107.github.io/amo_msg_stickers/' },
+      { label: 'Docs', href: 'https://mcar2107.github.io/amo_msg_stickers/en/' },
       { label: 'GitHub', href: 'https://github.com/mcar2107/amo_msg_stickers' },
     ],
     media: {

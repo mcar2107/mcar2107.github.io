@@ -6,8 +6,8 @@ export interface Link {
 export const profile = {
   name: 'Макар Короленко',
   role: 'Frontend-разработчик',
-  location: 'Москва · офис, гибрид, удалённо',
-  lead: 'Четыре года во фронтенде amoCRM: мессенджер amo (web и Electron), сервис промо-лендингов на Astro, AI-ассистент. Сам веду задачи от ТЗ до прода.',
+  location: 'Москва · гибрид, удалённо',
+  lead: 'Четыре года во фронтенде amoCRM: amo мессенджер (web и Electron), сервис промо-лендингов на Astro, AI-ассистент. Сам веду задачи от ТЗ до прода.',
   contacts: {
     telegram: { label: '@mcar_2107', href: 'https://t.me/mcar_2107' },
     email: { label: 'makar.korolenko2005@mail.ru', href: 'mailto:makar.korolenko2005@mail.ru' },
@@ -202,7 +202,7 @@ export const projects: Project[] = [
   {
     id: 'amo-stickers',
     title: 'amo stickers',
-    summary: 'Стикеры и GIF для мессенджера amo в браузере: кнопка рядом с эмодзи, отправка одним кликом.',
+    summary: 'Стикеры и GIF для amo мессенджера в браузере: кнопка рядом с эмодзи, отправка одним кликом.',
     badge: '80+ пользователей в Chrome Web Store',
     points: [
       'Одно ядро на TypeScript собирается в расширение Chrome (MV3) и userscript',
