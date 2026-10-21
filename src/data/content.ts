@@ -15,13 +15,6 @@ export const profile = {
   },
 };
 
-export const stats = [
-  { value: '4 года', label: 'в amoCRM, с 10.2022' },
-  { value: '~300\u00a0000', label: 'строк фронтенда в amo messenger' },
-  { value: '10–20 с → 3–5 с', label: 'сборка после переезда на Rsbuild' },
-  { value: '4', label: 'фронтенд-разработчика нанял в команду' },
-];
-
 export interface Case {
   id: string;
   title: string;
