@@ -2,6 +2,7 @@
 import type { Project } from '../data/content';
 import { t } from '../lib/typograf';
 import type { Lang } from '../i18n';
+import ArrowIcon from './ArrowIcon.astro';
 
 interface Props {
   project: Project;
@@ -72,7 +73,7 @@ const media = project.media;
         project.links.map((link, i) => (
           <a class:list={['btn', { 'btn-primary': i === 0 }]} href={link.href} target="_blank" rel="noopener">
             {link.label}
-            <span aria-hidden="true">↗</span>
+            <ArrowIcon />
           </a>
         ))
       }

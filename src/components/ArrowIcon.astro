@@ -1,0 +1,18 @@
+---
+// Стрелка внешней ссылки: символ ↗ отсутствует в Onest и рисуется случайным системным шрифтом
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg class:list={['inline-block size-[0.85em] shrink-0', className]} viewBox="0 0 12 12" aria-hidden="true">
+  <path
+    d="M3.5 8.5l5-5M4.5 3.5h4v4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"></path>
+</svg>
