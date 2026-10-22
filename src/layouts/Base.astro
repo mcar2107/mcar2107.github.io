@@ -1,6 +1,5 @@
 ---
-import '@fontsource-variable/onest';
-import '@fontsource-variable/jetbrains-mono';
+import { Font } from 'astro:assets';
 import '../styles/global.css';
 import { fallbackLang, langUrl, langs, ui, type Lang } from '../i18n';
 
@@ -25,6 +24,8 @@ const ogImage = ogImageFile
 // Для скрипта в head: язык — выбранный вручную, иначе первый поддерживаемый из настроек браузера,
 // иначе fallbackLang. Ботов не уводим, чтобы обе версии индексировались.
 const urls = Object.fromEntries(langs.map((l) => [l, langUrl(l)]));
+// Предзагружаем только основной шрифт и только подмножества, которые нужны на первом экране
+const fontPreload = lang === 'ru' ? [{ subset: 'cyrillic' }, { subset: 'latin' }] : [{ subset: 'latin' }];
 ---
 
 <!doctype html>
@@ -38,6 +39,8 @@ const urls = Object.fromEntries(langs.map((l) => [l, langUrl(l)]));
     {langs.map((l) => <link rel="alternate" hreflang={l} href={new URL(langUrl(l), Astro.site)} />)}
     <link rel="alternate" hreflang="x-default" href={new URL(langUrl(fallbackLang), Astro.site)} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <Font cssVariable="--font-onest" preload={fontPreload} />
+    <Font cssVariable="--font-jetbrains-mono" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
