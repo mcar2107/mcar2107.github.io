@@ -53,7 +53,7 @@ export const cases: Case[] = [
     ],
     result: 'The assistant and the tour are in production.',
     tags: ['MCP', 'AG-UI', 'SSE', 'React', 'Preact'],
-    links: [{ label: 'amocrm.ru', href: 'https://www.amocrm.ru' }],
+    links: [{ label: 'new.amocrm.ru', href: 'https://new.amocrm.ru' }],
   },
   {
     id: 'calls',

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Короленко Макар — Frontend-разработчик</title>
+<style>
+  @page { size: A4; margin: 14mm 15mm 14mm 15mm; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9.6pt;
+    line-height: 1.38;
+    color: #1a1a1a;
+  }
+  h1 { font-size: 20pt; margin: 0 0 2pt; letter-spacing: -0.2pt; }
+  .role { font-size: 11pt; font-weight: 600; margin: 0 0 4pt; }
+  .meta { margin: 0; color: #333; }
+  .meta a { color: inherit; text-decoration: none; }
+  h2 {
+    font-size: 8.6pt; letter-spacing: 1.2pt; text-transform: uppercase;
+    color: #555; margin: 12pt 0 5pt; padding-bottom: 2pt;
+    border-bottom: 0.6pt solid #ccc;
+  }
+  h3 { font-size: 10.6pt; margin: 8pt 0 0; }
+  h4 { font-size: 9.8pt; margin: 7pt 0 2pt; }
+  h4 span { font-weight: 400; color: #555; }
+  .dates { color: #555; margin: 0 0 2pt; }
+  p { margin: 0 0 3pt; }
+  ul { margin: 0; padding-left: 13pt; }
+  li { margin: 0 0 1.6pt; }
+  .skills { display: grid; grid-template-columns: 34mm 1fr; gap: 1.5pt 6pt; }
+  .skills dt { font-weight: 600; }
+  .skills dd { margin: 0; }
+  h4, h3 { break-after: avoid; }
+  li { break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<h1>Короленко Макар</h1>
+<p class="role">Frontend-разработчик</p>
+<p class="meta">Москва · гибрид, удалённо</p>
+<p class="meta">+7 (958) 648-77-63 · makar.korolenko2005@mail.ru · Telegram <a href="https://t.me/mcar_2107">@mcar_2107</a> · <a href="https://github.com/mcar2107">github.com/mcar2107</a></p>
+<p class="meta">Портфолио: <a href="https://mcar2107.pro">mcar2107.pro</a></p>
+
+<h2>О себе</h2>
+<p>Четыре года во фронтенде amoCRM: корпоративный мессенджер, сервис промо-лендингов и AI-ассистент. Веду задачи от требований до запуска и поддержки, участвую в найме и развитии команды.</p>
+
+<h2>Навыки</h2>
+<dl class="skills">
+  <dt>Языки</dt><dd>TypeScript, JavaScript</dd>
+  <dt>Frontend</dt><dd>React, Next.js, Astro, Preact, Redux Toolkit, Redux Saga, Zustand, Vue</dd>
+  <dt>Вёрстка</dt><dd>CSS, Sass, Tailwind, дизайн-токены, темизация, адаптивная и кроссбраузерная вёрстка, a11y</dd>
+  <dt>Сборка и CI</dt><dd>Rsbuild, Vite, Webpack, SWC, Docker, GitLab CI, nginx</dd>
+  <dt>Тестирование</dt><dd>Jest, Storybook, скриншотные тесты, Lighthouse CI</dd>
+  <dt>Desktop, backend</dt><dd>Electron, Node.js, Express, Nest.js, TypeORM</dd>
+  <dt>Протоколы</dt><dd>WebSocket, gRPC, SSE</dd>
+  <dt>AI</dt><dd>Claude Code, MCP, Figma MCP, AG-UI, свои скиллы для агентов</dd>
+  <dt>Аналитика</dt><dd>Яндекс Метрика, Вебвизор, Web Vitals</dd>
+  <dt>Прочее</dt><dd>Figma, FSD, PWA</dd>
+</dl>
+
+<h2>Опыт работы</h2>
+
+<h3>amoCRM · Frontend-разработчик</h3>
+<p class="dates">10.2022 — н. в. · 4 года</p>
+
+<h4>amo messenger <span>· корпоративный мессенджер, web и desktop, десятки тысяч пользователей</span></h4>
+<ul>
+  <li>Реализовал звонки, конференции и демонстрацию экрана на Jitsi в web- и десктопном приложении: от ТЗ до запуска.</li>
+  <li>Добавил закреплённые сообщения, реакции и права доступа к каналам.</li>
+  <li>Исправил падения после выхода из сна, утечку памяти и зависание ботов. Разбирал проблемы напрямую с клиентами и проверял исправления.</li>
+  <li>Настроил сборку desktop-приложения на electron-vite, выпустил версию для Linux.</li>
+  <li>Спроектировал и лидил задачу по препроцессингу отправляемого видео в десктопном приложении.</li>
+  <li>Вместе с коллегой ускорил сборку с 10–20 до 3–5 секунд переходом на Rsbuild, внедрил тёмную тему на дизайн-токенах и Tailwind. Вынес общие UI-компоненты.</li>
+  <li>Начал постепенную миграцию на TypeScript и включил обязательный прогон unit-тестов в CI.</li>
+</ul>
+
+<h4>Промо-сайты и лендинги <span>· 2026</span></h4>
+<ul>
+  <li>Предложил и разработал сервис промо-лендингов на Astro: CI/CD, UI-kit в Storybook, автоматические проверки качества и публикация из Markdown. Контент-команда выпускает лендинги без разработчика.</li>
+  <li>На основе Яндекс Метрики и Вебвизора переработал сценарий регистрации. Настроил мониторинг производительности страниц.</li>
+  <li>Автоматизировал вёрстку по макетам Figma с помощью AI-агента и проверкой результата тестами и скриншотами.</li>
+</ul>
+
+<h4>AI-ассистент amoCRM <span>· 2026</span></h4>
+<ul>
+  <li>Участвовал в разработке чата с потоковыми ответами и выполнением действий в аккаунте через MCP.</li>
+  <li>Сделал onboarding-тур: ассистент помогает новому клиенту настроить воронку, источники и поля сделок в диалоге.</li>
+  <li>Разработал встраиваемый виджет AI-агента для new.amocrm.ru.</li>
+</ul>
+
+<h4>Команда и качество кода</h4>
+<ul>
+  <li>Нанял четырёх frontend-разработчиков уровня Jun/Jun+ и вёл их как техлид: распределял задачи, проводил онбординг и помогал с техническими решениями.</li>
+  <li>Провожу код-ревью и проверяю готовность задач к выпуску.</li>
+  <li>Написал скиллы для AI-агентов, которыми пользуются все разработчики компании, и разработал несколько MCP-серверов для внутренних сервисов.</li>
+</ul>
+
+<h3>Ранние проекты</h3>
+<p class="dates">2022</p>
+<ul>
+  <li><b>Фестиваль анимации «Бессонница»</b>, 02–07.2022: доска объявлений, авторизация, интерактивная карта площадки, PWA с кешированием данных для работы без связи. React, TypeScript, Chakra UI.</li>
+  <li><b>Интернет-магазин «Чистодар»</b>, 07–08.2022: WordPress и WooCommerce, свой плагин быстрого заказа, эквайринг Альфа-Банка, выгрузка каталога из 1С.</li>
+</ul>
+
+</body>
+</html>
