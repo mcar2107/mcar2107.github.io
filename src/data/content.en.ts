@@ -4,7 +4,7 @@ export const profile = {
   name: 'Makar Korolenko',
   role: 'Frontend Developer',
   location: 'Moscow · hybrid, remote',
-  lead: 'Four years on the amoCRM frontend: the amo messenger (web and Electron), a promo landing page service on Astro, an AI assistant. I take tasks from spec to production on my own.',
+  lead: 'Four years on the amoCRM frontend: the amo messenger (web and Electron), a promo landing page service on Astro, an AI assistant. I own my tasks: I turn a rough business request into a spec, agree on the solution with the business, build it and ship it. After release I own the bugs too, and fix critical ones right away. I interview developers.',
   contacts: {
     telegram: { label: '@mcar_2107', href: 'https://t.me/mcar_2107' },
     email: { label: 'makar.korolenko2005@mail.ru', href: 'mailto:makar.korolenko2005@mail.ru' },
@@ -33,12 +33,13 @@ export const cases: Case[] = [
     done: [
       'Proposed moving landing pages into a separate Astro service, and the proposal was accepted',
       'Built the service from scratch: GitLab CI, nginx, a UI kit in Storybook',
-      'Set up landing page generation from Markdown with content checks in CI',
+      'Set up publishing landing pages from Markdown. In CI every landing page goes through linters, screenshot tests and Lighthouse',
       'Used Webvisor session replays to find where the landing page was losing visitors and added a sign-up form to the first screen',
-      'Set up an AI agent that builds landing pages from Figma mockups',
+      'Collect Web Vitals from real users',
+      'Wrote a skill with which Claude Code builds a block from a Figma MCP mockup and checks its own screenshot against the mockup',
     ],
-    result: 'The content team publishes landing pages on its own, without a developer.',
-    tags: ['Astro', 'GitLab CI', 'nginx', 'Storybook', 'Figma MCP'],
+    result: 'More than 15 landing pages so far. The content team puts together a new one from a ready template in about an hour, without a developer.',
+    tags: ['Astro', 'GitLab CI', 'nginx', 'Storybook', 'Lighthouse CI', 'Figma MCP'],
     links: [{ label: 'Sample landing page', href: 'https://pl.amocrm.ru/niche/realty/' }],
   },
   {
@@ -47,9 +48,9 @@ export const cases: Case[] = [
     product: 'amoCRM · 2026',
     context: 'The assistant answers in chat and performs actions in the CRM by itself via MCP.',
     done: [
-      'Worked on the chat: SSE streaming, the AG-UI protocol',
-      'Built an onboarding tour in which the assistant helps a new customer set up their account through a dialogue',
-      'Built an AI agent widget for websites',
+      'Built the chat UI and streaming of responses: SSE, the AG-UI protocol',
+      'Built an onboarding tour in which the assistant helps a new customer set up their pipeline, lead sources and deal fields through a dialogue',
+      'Built an embeddable assistant widget for new.amocrm.ru',
     ],
     result: 'The assistant and the tour are in production.',
     tags: ['MCP', 'AG-UI', 'SSE', 'React', 'Preact'],
@@ -61,9 +62,9 @@ export const cases: Case[] = [
     product: 'amo messenger · 2025',
     context: 'The messenger had no calls.',
     done: [
-      'Broke the feature down and wrote the spec myself',
+      'Designed the calls: broke the feature down and wrote the spec myself',
       'Calls, conferences and screen sharing on Jitsi, on web and desktop',
-      'Designed video preprocessing with codec licensing in mind',
+      'Designed video processing before sending: compression, transcoding with codec licensing in mind, and previews. A junior developer implemented it, and I helped along the way and reviewed the changes',
     ],
     result: 'Calls have been in production since 2025.',
     tags: ['Jitsi', 'Electron', 'WebSocket', 'React'],
@@ -102,16 +103,17 @@ export const cases: Case[] = [
   },
   {
     id: 'team',
-    title: 'Team',
+    title: 'Team and tooling',
     product: 'amoCRM',
     context: 'The previous frontend team had left.',
     done: [
       'Hired four developers',
       'Led them as a tech lead: tasks, onboarding, code review',
-      'Review and test my colleagues’ work before release',
+      'Wrote AI agent skills that every developer in the company uses',
+      'Built an MCP server for the internal test stand system: the agent builds branches on a stand by itself, helps resolve conflicts and keeps release QA tickets up to date',
     ],
     result: 'Two of the developers I hired still work with me.',
-    tags: ['Hiring', 'Code review', 'Onboarding'],
+    tags: ['Hiring', 'Code review', 'Onboarding', 'Claude Code', 'MCP'],
   },
 ];
 
@@ -143,7 +145,7 @@ export const bugs: Bug[] = [
   {
     id: 'kaspersky-csp',
     title: 'A widget without styles',
-    product: 'AI agent · website widget',
+    product: 'AI assistant · widget',
     symptom: 'For some visitors the widget opened without any styles.',
     cause: 'Kaspersky rewrites the CSP, which breaks inline styles.',
     fix: 'Moved the styles into a separate file.',
