@@ -18,6 +18,10 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "puppeteer": "^25.17.0",
     "tailwindcss": "^4.3.3"
+  },
+  "allowScripts": {
+    "puppeteer@25.17.0": true
   }
 }
